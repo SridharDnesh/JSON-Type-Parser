@@ -2,10 +2,23 @@ const inputValue = document.querySelector("#input");
 const outputValue = document.querySelector("#output");
 const resultBtn = document.querySelector("#resultBtn");
 
-const responseFormat = () => {
-  const json = JSON.parse(inputValue.value);
 
-  debugger
+
+const isValidJson =(json)=>{
+  try {
+    JSON.parse(json);
+  } catch (e) {
+    return false;
+  }
+return true;
+}
+
+
+const responseFormat = () => {
+  
+  if(!isValidJson(inputValue.value)) return alert("Invalid JSON format")
+
+  const json = [JSON.parse(inputValue.value)].flat();
 
   let response = {};
   let keys = Object.keys(json[0]);
@@ -19,7 +32,7 @@ const responseFormat = () => {
 };
 
 
-debugger
+
 
 const element = document.getElementById("resultBtn");
 element.addEventListener("click", responseFormat);
