@@ -5,7 +5,7 @@ const resultBtn = document.querySelector("#resultBtn");
 
 
 const isValidJson =(json)=>{
-  try {
+ try {
     JSON.parse(json);
   } catch (e) {
     return false;
@@ -21,12 +21,12 @@ const responseFormat = () => {
   const json = [JSON.parse(inputValue.value)].flat();
 
   let response = {};
-  let keys = Object.keys(json[0]);
+  keys = Object.keys(json[0]);
   let values = Object.values(json[0]);
   for (let index = 0; index < keys.length; index++)
     response[`${keys[index]}`] = Array.isArray(values[index])
       ? "array"
-      : typeof values[index];
+      : values[index] == null ? null : typeof values[index];
 
   outputValue.value = JSON.stringify(response, null, 4);
 };
